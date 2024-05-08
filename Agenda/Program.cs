@@ -4,6 +4,8 @@ List <Contact> contactsList= new List <Contact> ();
 int id_controller = 0;
 string path = @"C:\DadosAgenda\", file = "agenda.txt";
 
+
+
 bool CheckIfExist(string p, string f)
 {
     if(!Directory.Exists(p))
@@ -104,6 +106,50 @@ void ContactEdit(List <Contact> l)
 
 }
 
+void PhoneCreate(List <Contact> l)
+{
+    foreach (var item in l)
+    {
+        Console.WriteLine($"Id: {item.Id} Nome: {item.Name}");
+    }
+    Console.WriteLine("Digite o Id em que deseja adicionar um telefone");
+    int id = int.Parse(Console.ReadLine());
+
+    foreach (var item in l)
+    {
+        if(item.Id == id)
+        {
+            Console.WriteLine("Digite o numero de telefone que deseja adicionar ");
+            string tel = Console.ReadLine();
+            item.AddPhones(new(tel));
+        }
+
+    }
+    
+}
+
+void PhoneDelete(List<Contact> l)
+{
+    foreach (var item in l)
+    {
+        int c = item.CountPhones();
+        if(c > 0)
+        Console.WriteLine($"Id: {item.Id} Nome: {item.Name}");
+    }
+    Console.WriteLine("Digite o Id em que deseja deltar um telefone");
+    int id = int.Parse(Console.ReadLine());
+
+    foreach (var item in l)
+    {
+        if(item.Id == id)
+        {
+            item.PrintPhones();
+        }
+    }
+    Console.WriteLine("Digite o indice do telefone que deseja excluir");
+
+
+}
 
 Contact CreateContact()
 {

@@ -66,6 +66,20 @@ namespace Agenda
                 Console.WriteLine("telefone não inserido");
             }
         }
+        public int CountPhones()
+        {
+            return phones.Count;
+        }
+
+        public void PrintPhones()
+        {
+            int c = 0;
+            foreach (Phone phone in phones)
+            {
+                c++;
+                Console.WriteLine($"{c} - {phone.phoneNumber}");
+            }
+        }
     }
     
 }

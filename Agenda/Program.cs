@@ -1,9 +1,32 @@
 ﻿using Agenda;
+using System.Runtime.Intrinsics.Arm;
 
 List <Contact> contactsList= new List <Contact> ();
 int id_controller = 0;
 string path = @"C:\DadosAgenda\", file = "agenda.txt";
 
+int Menu()
+{
+    int op = 0;
+    do
+    {
+        Console.WriteLine("Informe a opção desejada");
+
+        Console.WriteLine("1 - Cadastrar um contato");
+        Console.WriteLine("2 - Cadastrar um numero");
+        Console.WriteLine("3 - Deletar um contato");
+        Console.WriteLine("4 - Deletar um numero");
+        Console.WriteLine("5 - Ver um contato");
+        Console.WriteLine("6 - Ver agenda");
+        Console.WriteLine("7 - Editar um contato existe");
+        Console.WriteLine("0 - Sair");
+
+        op = int.Parse(Console.ReadLine());
+        
+    } while (op > 7 || op < 0);
+
+    return op;
+}
 
 
 bool CheckIfExist(string p, string f)
@@ -169,14 +192,45 @@ Contact CreateContact()
 
 }
 
+Contact? FindContact(List<Contact> l)
+{
+    Contact? dell = null;
+    bool control = false;
+    do
+    {
+        foreach (var item in l)
+        {
+            Console.WriteLine($"Id: {item.Id} Nome: {item.Name}");
+        }
+        Console.WriteLine("Digite o Id  que deseja");
+        int id = int.Parse(Console.ReadLine());
+
+        foreach (var item in l)
+        {
+            if (item.Id == id)
+            {
+                dell = item;
+                control = true;
+            }
+        }
+        if (control == false)
+        {
+            Console.WriteLine("Digite um Id valido");            
+        }
+    } while (control == false);
+
+    return dell;
+}
+
 void AddContactList(List <Contact> contacts)
 {
     contacts.Add(CreateContact());
     
 }
 
-void RemoveContactList(List <Contact> contacts, Contact contact)
+void RemoveContactList(List <Contact> contacts)
 {
+    Contact contact = FindContact(contacts);
     contacts.Remove(contact);
 }
 
@@ -191,3 +245,37 @@ void ShowAll(List <Contact> l)
 
     Console.WriteLine("Fim da agenda");
 }
+
+
+do
+{
+    int op = Menu();
+    switch (op) 
+    {
+        case 1:
+            AddContactList(contactsList);
+            break;
+        case 2:
+            PhoneCreate(contactsList);
+            break;
+        case 3:
+            RemoveContactList(contactsList);
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 0:
+            break;
+        default:
+            break;
+    }
+
+
+
+
+} while (true);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,11 @@ namespace Agenda
         public string email { get; set; }
 
         List<Phone> phones;
+
+        public Contact()
+        {
+            
+        }
 
         public Contact(string name, string andress, string email, int id)
         {
